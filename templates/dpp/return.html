@@ -1,0 +1,26 @@
+{% extends "base_home.html" %}
+{% block jscssincludes %}
+    <script type="text/javascript">
+        if("{{ session.payment_request.status }}" == "P") {
+            if (typeof setTimeout != "undefined" && location.reload) {
+                setTimeout('location.reload()', 10000); //10 seconds
+            }
+        }
+	else {
+		window.location =  "{{ session.payment_request.next }}";
+		//alert("{{ session.payment_request.next }}");
+	}
+    </script>
+{% endblock  %}
+
+{% block maincontent %}
+
+<h2>Transaction for Invoice : {{ session.payment_request.id  }}</h2>
+
+<h3>Status : {{ session.payment_request.get_status_display }} ...  </h3>
+
+<div id="details">
+
+</div>
+
+{% endblock maincontent %}
